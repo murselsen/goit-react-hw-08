@@ -1,11 +1,17 @@
 import React from "react";
+import { Routes } from "react-router-dom";
 
-function App() {
+const App = () => {
   return (
     <>
-      <h1 class="text-3xl font-bold underline">Hello world!</h1>
+      <Routes>
+        <Route path="/"  />
+        <Route path="/login" />
+        <Route path="/register" />
+        <Route path="/contacts" />
+      </Routes>
     </>
   );
-}
+};
 
 export default App;

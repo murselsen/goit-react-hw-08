@@ -1,16 +1,51 @@
-import React from "react";
-import { Routes } from "react-router-dom";
+import React, { Suspense, lazy } from "react";
+import { Routes, Route } from "react-router-dom";
+
+// Auth components
+import RestrictedRoute from "./components/RestrictedRoute";
+import PrivateRoute from "./components/PrivateRoute";
+// App components
+import AppBar from "./components/AppBar/AppBar";
+import AppFooterBar from "./components/AppFooterBar/AppFooterBar";
+
+const Home = lazy(() => import("./pages/Home"));
+const Login = lazy(() => import("./pages/Login"));
+const Registration = lazy(() => import("./pages/Registration"));
+const Contacts = lazy(() => import("./pages/Contacts"));
 
 const App = () => {
   return (
-    <>
+    <Suspense fallback={<div>Loading...</div>}>
+      <AppBar />
       <Routes>
-        <Route path="/"  />
-        <Route path="/login" />
-        <Route path="/register" />
-        <Route path="/contacts" />
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/login"
+          element={
+            <RestrictedRoute>
+              <Login />
+            </RestrictedRoute>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <RestrictedRoute>
+              <Registration />
+            </RestrictedRoute>
+          }
+        />
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute>
+              <Contacts />
+            </PrivateRoute>
+          }
+        />
       </Routes>
-    </>
+      <AppFooterBar />
+    </Suspense>
   );
 };
 

@@ -19,6 +19,7 @@ const Home = () => {
               <h1>Welcome to the PhoneBook Application 📞</h1>
             )}
           </h1>
+          <br />
           <p className={css.Description}>
             {user?.name
               ? 'Click on the "Contacts" tab above to browse your phone book.'

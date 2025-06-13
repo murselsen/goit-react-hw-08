@@ -43,3 +43,20 @@
     border-bottom: 5px solid var(--teal);
     color: var(--teal)
 }
+
+.Form .FormRow .FormGroup .Button {
+    padding: 10px 20px;
+    background-color: var(--teal);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.Form .FormRow .FormGroup .Button:hover {
+    background-color: var(--teal-dark);
+    border: 1px solid var(--teal);
+    transform: scale(0.95);
+}

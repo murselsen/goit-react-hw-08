@@ -6,10 +6,10 @@ import { nanoid } from "nanoid";
 import css from "./LoginForm.module.css";
 
 const LoginForm = () => {
-    const emailInput = nanoid();
-    const passwordInput = nanoid();
-    // const usernameInput = nanoid();
-//   const checkPasswordInput = nanoid();
+  const emailInput = nanoid();
+  const passwordInput = nanoid();
+  // const usernameInput = nanoid();
+  //   const checkPasswordInput = nanoid();
   return (
     <>
       <Formik
@@ -74,6 +74,13 @@ const LoginForm = () => {
               />
               <ErrorMessage name="checkPassword" component={"span"} />
             </div> */}
+          </div>
+          <div className={css.FormRow}>
+            <div className={css.FormGroup}>
+              <button type="submit" className={css.Button}>
+                Login
+              </button>
+            </div>
           </div>
         </Form>
       </Formik>

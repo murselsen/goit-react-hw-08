@@ -9,8 +9,8 @@ const LoginForm = () => {
   const emailInput = nanoid();
   const passwordInput = nanoid();
   const LoginFormValidationSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email").required("Required"),
-    password: Yup.string().min(6, "Too Short!").required("Required"),
+    email: Yup.string().email("🚫 Invalid email").required("❗ Required"),
+    password: Yup.string().min(6, "❗ Too Short!").required("❗ Required"),
   });
   return (
     <>
@@ -22,10 +22,7 @@ const LoginForm = () => {
           checkPassword: "",
         }}
         onSubmit={() => {}}
-        validationSchema={Yup.object().shape({
-          email: Yup.string().email("Invalid email").required("Required"),
-          password: Yup.string().min(6, "Too Short!").required("Required"),
-        })}
+        validationSchema={LoginFormValidationSchema}
       >
         <Form className={css.Form}>
           <h2>LOGIN FORM</h2>

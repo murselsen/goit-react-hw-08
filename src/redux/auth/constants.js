@@ -1,5 +1,7 @@
 export const SLICE_NAME = "auth";
 
+export const AUTH_SET_TOKEN = `${SLICE_NAME}/setToken`;
+
 export const AUTH_REFRESH = `${SLICE_NAME}/refresh`;
 export const AUTH_REFRESH_PENDING = `${AUTH_REFRESH}/pending`;
 export const AUTH_REFRESH_FULFILLED = `${AUTH_REFRESH}/fulfilled`;

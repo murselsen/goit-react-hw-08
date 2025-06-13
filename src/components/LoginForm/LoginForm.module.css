@@ -1,0 +1,45 @@
+.Form {
+    background-color: var(--black);
+    color: var(--white);
+    width: 100%;
+    max-width: 400px;
+    padding: 45px 35px;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.Form .FormRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px;
+}
+
+.Form .FormRow .FormGroup {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    gap: 10px;
+}
+
+
+
+
+.Form .FormRow .FormGroup .Input {
+    padding: 5px 10px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--white);
+    color: var(--white);
+    transition: border-bottom 1.3s cubic-bezier(0.165, 0.84, 0.44, 1), color 0.3s ease;
+}
+
+.Form .FormRow .FormGroup .Input:focus {
+    border-bottom: 5px solid var(--teal);
+    color: var(--teal)
+}

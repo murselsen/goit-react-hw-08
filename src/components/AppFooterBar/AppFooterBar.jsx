@@ -1,6 +1,9 @@
+import React from "react";
+import css from "./AppFooterBar.module.css";
+
 const AppFooterBar = () => {
   return (
-    <footer>
+    <footer className={css.FooterBar}>
       <h6>
         {"github"}
         <a

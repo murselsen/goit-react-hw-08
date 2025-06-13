@@ -1,5 +1,6 @@
 .AppBar {
     width: 85%;
+    height: 75px;
     margin: 0 auto;
     border-bottom: 1px solid var(--teal);
     padding: 25px;
@@ -37,6 +38,21 @@
 }
 
 .Nav .NavList .NavItem .NavLink:hover {
+    color: var(--teal);
+    text-shadow: -1px 4px 5px rgba(0, 0, 0, 0.75);
+}
+
+
+.Nav .NavList .NavItem .NavButton {
+    background-color: transparent;
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.Nav .NavList .NavItem .NavButton:hover {
     color: var(--teal);
     text-shadow: -1px 4px 5px rgba(0, 0, 0, 0.75);
 }

@@ -1,10 +1,12 @@
 import React from "react";
+import css from "./Page.module.css";
+import LoginForm from "../components/LoginForm/LoginForm";
 
 const Login = () => {
   return (
-    <>
-      <h4> Login Page </h4>
-    </>
+    <div className={css.Container}>
+      <LoginForm />
+    </div>
   );
 };
 

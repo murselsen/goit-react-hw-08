@@ -1,6 +1,8 @@
 import css from "../AppBar/AppBar.module.css";
-
+import { useSelector } from "react-redux";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
 const Navigation = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   return (
     <>
       <ul className={css.NavList}>
@@ -9,11 +11,13 @@ const Navigation = () => {
             Home
           </a>
         </li>
-        <li className={css.NavItem}>
-          <a href="/contacts" className={css.NavLink}>
-            Contacts
-          </a>
-        </li>
+        {isLoggedIn && (
+          <li className={css.NavItem}>
+            <a href="/contacts" className={css.NavLink}>
+              Contacts
+            </a>
+          </li>
+        )}
       </ul>
     </>
   );

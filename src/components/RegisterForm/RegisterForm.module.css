@@ -60,10 +60,3 @@
     border: 1px solid var(--teal);
     transform: scale(0.95);
 }
-
-.FormGroup .ErrorMessage {
-    color: red;
-    font-size: 14px;
-
-    transition: all 5.3s ease-in-out;
-}

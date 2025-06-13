@@ -3,15 +3,13 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { nanoid } from "nanoid";
 
-import css from "./LoginForm.module.css";
+import css from "./RegisterForm.module.css";
 
-const LoginForm = () => {
+const RegisterForm = () => {
+  const usernameInput = nanoid();
   const emailInput = nanoid();
   const passwordInput = nanoid();
-  const LoginFormValidationSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email").required("Required"),
-    password: Yup.string().min(6, "Too Short!").required("Required"),
-  });
+  const checkPasswordInput = nanoid();
   return (
     <>
       <Formik
@@ -22,14 +20,22 @@ const LoginForm = () => {
           checkPassword: "",
         }}
         onSubmit={() => {}}
-        validationSchema={Yup.object().shape({
-          email: Yup.string().email("Invalid email").required("Required"),
-          password: Yup.string().min(6, "Too Short!").required("Required"),
-        })}
       >
         <Form className={css.Form}>
-          <h2>LOGIN FORM</h2>
+          <h2>REGISTER FORM</h2>
           <div className={css.FormRow}>
+            <div className={css.FormGroup}>
+              <label htmlFor={usernameInput} className={css.Label}>
+                Username
+              </label>
+              <Field
+                type="text"
+                name="username"
+                id={usernameInput}
+                className={css.Input}
+              />
+              <ErrorMessage name="username" component={"span"} />
+            </div>
             <div className={css.FormGroup}>
               <label htmlFor={emailInput} className={css.Label}>
                 Email
@@ -40,11 +46,7 @@ const LoginForm = () => {
                 id={emailInput}
                 className={css.Input}
               />
-              <ErrorMessage
-                name="email"
-                component={"span"}
-                className={css.ErrorMessage}
-              />
+              <ErrorMessage name="email" component={"span"} />
             </div>
           </div>
           <div className={css.FormRow}>
@@ -58,11 +60,19 @@ const LoginForm = () => {
                 id={passwordInput}
                 className={css.Input}
               />
-              <ErrorMessage
-                name="password"
-                component={"span"}
-                className={css.ErrorMessage}
+              <ErrorMessage name="password" component={"span"} />
+            </div>
+            <div className={css.FormGroup}>
+              <label htmlFor={checkPasswordInput} className={css.Label}>
+                Check Password
+              </label>
+              <Field
+                type="password"
+                name="checkPassword"
+                id={checkPasswordInput}
+                className={css.Input}
               />
+              <ErrorMessage name="checkPassword" component={"span"} />
             </div>
           </div>
           <div className={css.FormRow}>
@@ -78,4 +88,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

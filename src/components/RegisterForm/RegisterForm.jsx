@@ -57,7 +57,11 @@ const RegisterForm = () => {
       >
         <Form className={css.Form}>
           <h2>REGISTER FORM</h2>
-          {authError && <span className={css.ErrorMessage}> {authError}</span>}
+          {authError && (
+            <div className={css.FormGroup}>
+              <span className={css.ErrorMessage}>❗{authError}❗</span>
+            </div>
+          )}
           <div className={css.FormRow}>
             <div className={css.FormGroup}>
               <label htmlFor={nameInput} className={css.Label}>

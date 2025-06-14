@@ -10,6 +10,13 @@ const initialState = {
 const slice = createSlice({
   name: SLICE_NAME,
   initialState: initialState,
+  reducers: {
+    resetContacts: (state) => {
+      state.items = [];
+      state.isLoading = false;
+      state.error = null;
+    },
+  },
   extraReducers: () => {},
 });
 

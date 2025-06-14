@@ -9,7 +9,11 @@ import {
   AUTH_REGISTER_PENDING,
   AUTH_REGISTER_FULFILLED,
   AUTH_REGISTER_REJECTED,
+  AUTH_CURRENT_PENDING,
+  AUTH_CURRENT_FULFILLED,
+  AUTH_CURRENT_REJECTED,
 } from "./constants";
+
 const initialState = {
   user: {
     name: null,
@@ -26,6 +30,22 @@ const slice = createSlice({
   name: SLICE_NAME,
   initialState: initialState,
   extraReducers: (builder) => {
+    builder.addCase(AUTH_CURRENT_PENDING, (state) => {
+      state.isRefreshing = true;
+      state.isLoading = true;
+    });
+    builder.addCase(AUTH_CURRENT_FULFILLED, (state, action) => {
+      state.isRefreshing = false;
+      state.isLoading = false;
+      state.isLoggedIn = true;
+      state.user.name = action.payload.name;
+      state.user.email = action.payload.email;
+    });
+    builder.addCase(AUTH_CURRENT_REJECTED, (state, action) => {
+      state.isRefreshing = false;
+      state.isLoading = false;
+      state.error = action.payload;
+    });
     // Authentication Login Actions
     builder.addCase(AUTH_LOGIN_PENDING, (state) => {
       state.isLoading = true;

@@ -12,13 +12,14 @@ const Home = () => {
     <div className={pageCss.Container}>
       <div className={css.Home}>
         <div className={css.HomeRow}>
-          <h1 className={css.Title}>
-            {user?.name ? (
-              <h1>Welcome, {user.name}! 👋</h1>
-            ) : (
-              <h1>Welcome to the PhoneBook Application 📞</h1>
-            )}
-          </h1>
+          {user?.name ? (
+            <h1 className={css.Title}>Welcome, {user.name}! 👋</h1>
+          ) : (
+            <h1 className={css.Title}>
+              Welcome to the PhoneBook Application 📞
+            </h1>
+          )}
+
           <br />
           <p className={css.Description}>
             {user?.name

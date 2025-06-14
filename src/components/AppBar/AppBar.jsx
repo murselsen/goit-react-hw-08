@@ -1,5 +1,5 @@
 // Modules
-import { useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
 // Components
 import AuthNav from "../AuthNav/AuthNav";
@@ -23,7 +23,7 @@ const AppBar = () => {
           </span>
           Phonebook
         </div>
-        {isLoggedIn ? <UserName /> : <AuthNav />}
+        {isLoggedIn ? <UserMenu /> : <AuthNav />}
       </nav>
     </header>
   );

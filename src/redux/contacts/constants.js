@@ -1,5 +1,7 @@
 export const SLICE_NAME = "contacts";
 
+export const CONTACTS_RESET = `${SLICE_NAME}/resetContacts`;
+
 export const CONTACTS_FETCH = `${SLICE_NAME}/fetch`;
 export const CONTACTS_FETCH_PENDING = `${CONTACTS_FETCH}/pending`;
 export const CONTACTS_FETCH_FULFILLED = `${CONTACTS_FETCH}/fulfilled`;

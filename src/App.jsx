@@ -1,5 +1,10 @@
-import React, { Suspense, lazy } from "react";
+import React, { useEffect, Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+// Redux
+import { current } from "./redux/auth/operations";
+
+// Styles
 import "./App.css";
 
 // Auth components
@@ -16,6 +21,12 @@ const Registration = lazy(() => import("./pages/Registration"));
 const Contacts = lazy(() => import("./pages/Contacts"));
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(current());
+  }, [dispatch]);
+
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <Toaster />
@@ -48,7 +59,7 @@ const App = () => {
             }
           />
         </Routes>
-        {/* <AppFooterBar /> */}
+        <AppFooterBar />
       </div>
     </Suspense>
   );

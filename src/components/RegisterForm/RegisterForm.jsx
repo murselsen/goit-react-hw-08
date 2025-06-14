@@ -10,18 +10,22 @@ import { register } from "../../redux/auth/operations";
 import css from "./RegisterForm.module.css";
 
 const RegisterForm = () => {
-  const usernameInput = nanoid();
+  const nameInput = nanoid();
   const emailInput = nanoid();
   const passwordInput = nanoid();
   const checkPasswordInput = nanoid();
   const dispatch = useDispatch();
+
+  // Form submission handler
   const formHandleSubmit = (values, actions) => {
     console.log("Form submitted with values:", values);
     console.log("Actions:", actions);
     dispatch(register(values));
   };
+
+  // Form validation schema
   const registerFormValidationSchema = Yup.object().shape({
-    usernameInput: Yup.string()
+    name: Yup.string()
       .required("❗ Required")
       .min(3, "🚫 Username must be at least 3 characters"),
     email: Yup.string().email("🚫 Invalid email").required("❗ Required"),
@@ -35,28 +39,31 @@ const RegisterForm = () => {
     <>
       <Formik
         initialValues={{
-          username: "",
+          name: "",
           email: "",
           password: "",
           checkPassword: "",
         }}
         onSubmit={formHandleSubmit}
         validationSchema={registerFormValidationSchema}
+        validateOnMount={true}
+        validateOnBlur={true}
+        validateOnChange={true}
       >
         <Form className={css.Form}>
           <h2>REGISTER FORM</h2>
           <div className={css.FormRow}>
             <div className={css.FormGroup}>
-              <label htmlFor={usernameInput} className={css.Label}>
+              <label htmlFor={nameInput} className={css.Label}>
                 Username
               </label>
               <Field
                 type="text"
-                name="username"
-                id={usernameInput}
+                name="name"
+                id={nameInput}
                 className={css.Input}
               />
-              <ErrorMessage name="username" component={"span"} />
+              <ErrorMessage name="name" component={"span"} />
             </div>
             <div className={css.FormGroup}>
               <label htmlFor={emailInput} className={css.Label}>

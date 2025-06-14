@@ -2,20 +2,24 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { nanoid } from "nanoid";
-import { useDispatch } from "react-redux";
 
 // Redux
+import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/operations";
 // Styles
 import css from "./RegisterForm.module.css";
 
 const RegisterForm = () => {
-  const dispatch = useDispatch();
   const usernameInput = nanoid();
   const emailInput = nanoid();
   const passwordInput = nanoid();
   const checkPasswordInput = nanoid();
-
+  const dispatch = useDispatch();
+  const formHandleSubmit = (values, actions) => {
+    console.log("Form submitted with values:", values);
+    console.log("Actions:", actions);
+    dispatch(register(values));
+  };
   const registerFormValidationSchema = Yup.object().shape({
     usernameInput: Yup.string()
       .required("❗ Required")
@@ -26,12 +30,6 @@ const RegisterForm = () => {
       .oneOf([Yup.ref("password"), null], "🚫 Passwords must match")
       .required("❗ Required"),
   });
-
-  const formHandleSubmit = (values, actions) => {
-    console.log("Form submitted with values:", values);
-    console.log("Actions:", actions);
-    dispatch(register(values));
-  };
 
   return (
     <>

@@ -12,6 +12,7 @@ import {
   AUTH_CURRENT_PENDING,
   AUTH_CURRENT_FULFILLED,
   AUTH_CURRENT_REJECTED,
+  AUTH_LOGOUT,
 } from "./constants";
 
 const initialState = {
@@ -29,7 +30,19 @@ const initialState = {
 const slice = createSlice({
   name: SLICE_NAME,
   initialState: initialState,
+  reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(AUTH_LOGOUT, (state) => {
+      state = state.user = {
+        name: null,
+        email: null,
+      };
+      state.token = null;
+      state.isLoggedIn = false;
+      state.isRefreshing = false;
+      state.isLoading = false;
+      state.error = null;
+    });
     builder.addCase(AUTH_CURRENT_PENDING, (state) => {
       state.isRefreshing = true;
       state.isLoading = true;

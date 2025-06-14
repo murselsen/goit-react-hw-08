@@ -1,4 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
-import { AUTH_SET_TOKEN } from "./constants";
+import { AUTH_SET_TOKEN, AUTH_LOGOUT } from "./constants";
 
 export const setToken = createAction(AUTH_SET_TOKEN);
+

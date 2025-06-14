@@ -2,7 +2,17 @@ import axios from "axios";
 axios.defaults.baseURL = "https://connections-api.goit.global"; // Set your API base URL here
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { AUTH_LOGIN, AUTH_REGISTER, AUTH_CURRENT } from "./constants";
+import {
+  AUTH_LOGIN,
+  AUTH_REGISTER,
+  AUTH_CURRENT,
+  AUTH_LOGOUT,
+} from "./constants";
+import { resetContacts } from "../contacts/actions";
+
+export const logout = createAsyncThunk(AUTH_LOGOUT, async (_, thunkAPI) => {
+  thunkAPI.dispatch(resetContacts());
+});
 
 export const register = createAsyncThunk(AUTH_REGISTER, async (_, thunkAPI) => {
   try {

@@ -1,12 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 // Redux selectors
 import { selectAuthUser } from "../../redux/auth/selectors";
+// Redux actions
+import { logout } from "../../redux/auth/operations";
+
 // Styles
 import css from "../AppBar/AppBar.module.css";
 
 const UserMenu = () => {
+  const dispatch = useDispatch();
   const { name } = useSelector(selectAuthUser);
 
   return (
@@ -21,7 +25,14 @@ const UserMenu = () => {
           </a>
         </li>
         <li className={css.NavItem}>
-          <button className={css.NavButton}>LogOut</button>
+          <button
+            className={css.NavButton}
+            onClick={() => {
+              dispatch(logout());
+            }}
+          >
+            LogOut
+          </button>
         </li>
       </ul>
     </>

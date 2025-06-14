@@ -14,7 +14,6 @@ import PrivateRoute from './components/PrivateRoute';
 // App components
 import AppBar from './components/AppBar/AppBar';
 import AppFooterBar from './components/AppFooterBar/AppFooterBar';
-import Loader from './components/Loader/Loader';
 
 // Pages
 const Home = lazy(() => import('./pages/Home'));

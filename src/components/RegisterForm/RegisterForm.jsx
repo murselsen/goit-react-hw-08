@@ -4,8 +4,10 @@ import * as Yup from "yup";
 import { nanoid } from "nanoid";
 
 // Redux
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../redux/auth/operations";
+import { selectAuthError } from "../../redux/auth/selectors";
+
 // Styles
 import css from "./RegisterForm.module.css";
 
@@ -22,6 +24,9 @@ const RegisterForm = () => {
     console.log("Actions:", actions);
     dispatch(register(values));
   };
+
+  // Auth error selector
+  const authError = useSelector(selectAuthError);
 
   // Form validation schema
   const registerFormValidationSchema = Yup.object().shape({
@@ -52,6 +57,7 @@ const RegisterForm = () => {
       >
         <Form className={css.Form}>
           <h2>REGISTER FORM</h2>
+          {authError && <span className={css.ErrorMessage}> {authError}</span>}
           <div className={css.FormRow}>
             <div className={css.FormGroup}>
               <label htmlFor={nameInput} className={css.Label}>
@@ -63,7 +69,11 @@ const RegisterForm = () => {
                 id={nameInput}
                 className={css.Input}
               />
-              <ErrorMessage name="name" component={"span"} />
+              <ErrorMessage
+                name="name"
+                component={"span"}
+                className={css.ErrorMessage}
+              />
             </div>
             <div className={css.FormGroup}>
               <label htmlFor={emailInput} className={css.Label}>
@@ -75,7 +85,11 @@ const RegisterForm = () => {
                 id={emailInput}
                 className={css.Input}
               />
-              <ErrorMessage name="email" component={"span"} />
+              <ErrorMessage
+                name="email"
+                component={"span"}
+                className={css.ErrorMessage}
+              />
             </div>
           </div>
           <div className={css.FormRow}>
@@ -89,7 +103,11 @@ const RegisterForm = () => {
                 id={passwordInput}
                 className={css.Input}
               />
-              <ErrorMessage name="password" component={"span"} />
+              <ErrorMessage
+                name="password"
+                component={"span"}
+                className={css.ErrorMessage}
+              />
             </div>
             <div className={css.FormGroup}>
               <label htmlFor={checkPasswordInput} className={css.Label}>
@@ -101,7 +119,11 @@ const RegisterForm = () => {
                 id={checkPasswordInput}
                 className={css.Input}
               />
-              <ErrorMessage name="checkPassword" component={"span"} />
+              <ErrorMessage
+                name="checkPassword"
+                component={"span"}
+                className={css.ErrorMessage}
+              />
             </div>
           </div>
           <div className={css.FormRow}>

@@ -30,10 +30,9 @@ const initialState = {
 const slice = createSlice({
   name: SLICE_NAME,
   initialState: initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(AUTH_LOGOUT, (state) => {
-      state = state.user = {
+  reducers: {
+    logout: (state) => {
+      state.user = {
         name: null,
         email: null,
       };
@@ -42,7 +41,9 @@ const slice = createSlice({
       state.isRefreshing = false;
       state.isLoading = false;
       state.error = null;
-    });
+    },
+  },
+  extraReducers: (builder) => {
     builder.addCase(AUTH_CURRENT_PENDING, (state) => {
       state.isRefreshing = true;
       state.isLoading = true;

@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 // Redux selectors
 import { selectAuthUser } from "../../redux/auth/selectors";
 // Redux actions
-import { logout } from "../../redux/auth/operations";
+import { logout } from "../../redux/auth/actions";
 
 // Styles
 import css from "../AppBar/AppBar.module.css";

@@ -2,14 +2,37 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { nanoid } from "nanoid";
+import { useDispatch } from "react-redux";
 
+// Redux
+import { register } from "../../redux/auth/operations";
+// Styles
 import css from "./RegisterForm.module.css";
 
 const RegisterForm = () => {
+  const dispatch = useDispatch();
   const usernameInput = nanoid();
   const emailInput = nanoid();
   const passwordInput = nanoid();
   const checkPasswordInput = nanoid();
+
+  const registerFormValidationSchema = Yup.object().shape({
+    usernameInput: Yup.string()
+      .required("❗ Required")
+      .min(3, "🚫 Username must be at least 3 characters"),
+    email: Yup.string().email("🚫 Invalid email").required("❗ Required"),
+    password: Yup.string().required("❗ Required"),
+    checkPassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "🚫 Passwords must match")
+      .required("❗ Required"),
+  });
+
+  const formHandleSubmit = (values, actions) => {
+    console.log("Form submitted with values:", values);
+    console.log("Actions:", actions);
+    dispatch(register(values));
+  };
+
   return (
     <>
       <Formik
@@ -19,7 +42,8 @@ const RegisterForm = () => {
           password: "",
           checkPassword: "",
         }}
-        onSubmit={() => {}}
+        onSubmit={formHandleSubmit}
+        validationSchema={registerFormValidationSchema}
       >
         <Form className={css.Form}>
           <h2>REGISTER FORM</h2>
@@ -78,7 +102,7 @@ const RegisterForm = () => {
           <div className={css.FormRow}>
             <div className={css.FormGroup}>
               <button type="submit" className={css.Button}>
-                Login
+                Register
               </button>
             </div>
           </div>

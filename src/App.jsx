@@ -8,6 +8,7 @@ import PrivateRoute from "./components/PrivateRoute";
 // App components
 import AppBar from "./components/AppBar/AppBar";
 import AppFooterBar from "./components/AppFooterBar/AppFooterBar";
+import { Toaster } from "react-hot-toast";
 
 const Home = lazy(() => import("./pages/Home"));
 const Login = lazy(() => import("./pages/Login"));
@@ -17,6 +18,7 @@ const Contacts = lazy(() => import("./pages/Contacts"));
 const App = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
+      <Toaster />
       <div className="app">
         <AppBar />
         <Routes>

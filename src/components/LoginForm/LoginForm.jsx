@@ -2,16 +2,34 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { nanoid } from "nanoid";
+import { toast } from "react-hot-toast";
+// Redux
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/auth/operations";
 
+// Styles
 import css from "./LoginForm.module.css";
 
 const LoginForm = () => {
+  const dispatch = useDispatch();
+
   const emailInput = nanoid();
   const passwordInput = nanoid();
   const LoginFormValidationSchema = Yup.object().shape({
     email: Yup.string().email("🚫 Invalid email").required("❗ Required"),
-    password: Yup.string().min(6, "❗ Too Short!").required("❗ Required"),
+    password: Yup.string().required("❗ Required"),
   });
+
+  const formHandleSubmit = (values, actions) => {
+    toast.promise(dispatch(login(values)), {
+      loading: "Saving...",
+      success: <b>Settings saved!</b>,
+      error: <b>Could not save.</b>,
+    });
+    ;
+    actions.resetForm();
+  };
+
   return (
     <>
       <Formik
@@ -21,7 +39,7 @@ const LoginForm = () => {
           password: "",
           checkPassword: "",
         }}
-        onSubmit={() => {}}
+        onSubmit={formHandleSubmit}
         validationSchema={LoginFormValidationSchema}
       >
         <Form className={css.Form}>

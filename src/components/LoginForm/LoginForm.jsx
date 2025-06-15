@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/auth/operations';
-import { selectAuthError, selectAuthUser } from '../../redux/auth/selectors';
+import { selectAuthError } from '../../redux/auth/selectors';
 
 // Styles
 import css from './LoginForm.module.css';

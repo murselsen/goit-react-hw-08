@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { nanoid } from 'nanoid';
-
+import toast from 'react-hot-toast';
 // Redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../redux/auth/operations';
+import { selectAuthError } from '../../redux/auth/selectors';
 
 // Styles
 import css from './RegisterForm.module.css';
@@ -16,6 +17,14 @@ const RegisterForm = () => {
 	const passwordInput = nanoid();
 	const checkPasswordInput = nanoid();
 	const dispatch = useDispatch();
+
+	const authError = useSelector(selectAuthError);
+
+	useEffect(() => {
+		if (authError) {
+			toast.error(`Error: ${authError}`);
+		}
+	}, [authError]);
 
 	// Form submission handler
 	const formHandleSubmit = (values, actions) => {

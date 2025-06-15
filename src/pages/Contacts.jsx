@@ -12,9 +12,14 @@ import * as Yup from 'yup';
 // import { toast } from 'react-hot-toast';
 
 // Redux
-import { addContact, fetchContacts } from '../redux/contacts/operations';
+import {
+	addContact,
+	fetchContacts,
+	deleteContact,
+} from '../redux/contacts/operations';
 import { selectContacts, selectError } from '../redux/contacts/selectors';
 import { setFilterType, setFilterValue } from '../redux/filters/actions';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Contacts = () => {
 	const dispatch = useDispatch();
@@ -127,9 +132,9 @@ const Contacts = () => {
 					</Formik>
 				</div>
 				<div className={pageCss.Column}>
-					{contacts.length > 0 ? (
-						<div className={`${pageCss.Row}`}>
-							<ContactSearchForm />
+					<div className={`${pageCss.Row}`}>
+						<ContactSearchForm />
+						{contacts.length > 0 ? (
 							<ul className={css.ContactsList}>
 								{contacts.map(contact => (
 									<ContactItem
@@ -138,10 +143,10 @@ const Contacts = () => {
 									/>
 								))}
 							</ul>
-						</div>
-					) : (
-						<h3>Iletişim kaydı bulunamadı...</h3>
-					)}
+						) : (
+							<h3 className={css.NotFoundTitle}>No contact record found...</h3>
+						)}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -149,7 +154,18 @@ const Contacts = () => {
 };
 
 const ContactItem = ({ data }) => {
+	const dispatch = useDispatch();
 	const { name, number } = data;
+	const handleClick = () => {
+		dispatch(deleteContact(data));
+	};
+
+	const contactsError = useSelector(selectError);
+	useEffect(() => {
+		contactsError &&
+			toast.error(`Error deleting contact: ${contactsError}`);
+	}, [contactsError]);
+
 	return (
 		<li className={css.ContactItem}>
 			<div className={css.Info}>
@@ -158,8 +174,9 @@ const ContactItem = ({ data }) => {
 				<p className={css.Phone}>📞 {number}</p>
 			</div>
 			<div className={css.Actions}>
-				<button className={css.ActionButton}>Delete</button>
-				<button className={css.ActionButton}>Edit</button>
+				<button className={css.ActionButton} onClick={handleClick}>
+					Delete
+				</button>
 			</div>
 		</li>
 	);
@@ -182,10 +199,16 @@ const ContactSearchForm = () => {
 							name="type"
 							id={searchTypeID}
 							className={css.Input}
-							onChange={event =>
-								dispatch(setFilterType(event.target.value))
-							}
+							onChange={event => {
+								const value = event.target.value;
+								dispatch(setFilterType(value));
+
+								document.getElementById(
+									searchValueID
+								).disabled = value === '' ? true : false;
+							}}
 						>
+							<option value="">Select Type</option>
 							<option value="name">Name</option>
 							<option value="number">Phone</option>
 						</select>

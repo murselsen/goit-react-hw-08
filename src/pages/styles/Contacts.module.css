@@ -29,11 +29,6 @@
     color: white
 }
 
-.ContactsList .ContactItem:disabled {
-    background-color: var(--grey);
-    color: var(--white);
-    cursor: not-allowed;
-}
 
 
 .ContactsList .ContactItem:hover {
@@ -143,6 +138,13 @@
     transition: border-bottom 1.3s cubic-bezier(0.165, 0.84, 0.44, 1), color 0.3s ease;
 }
 
+.Form .FormRow .FormGroup .Input:disabled {
+    background-color: var(--grey);
+    color: var(--white);
+    border-bottom: 1px solid var(--white);
+    cursor: not-allowed;
+}
+
 .Form .FormRow .FormGroup .Input:focus {
     border-bottom: 5px solid var(--teal);
     color: var(--teal)
@@ -170,4 +172,12 @@
     font-size: 14px;
 
     transition: all 5.3s ease-in-out;
+}
+
+.NotFoundTitle {
+    color: var(--white);
+    font-size: 2em;
+    text-align: center;
+    margin-top: 50px;
+    margin: 0 auto;
 }

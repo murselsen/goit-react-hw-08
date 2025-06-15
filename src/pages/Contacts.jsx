@@ -14,6 +14,7 @@ import * as Yup from 'yup';
 // Redux
 import { addContact, fetchContacts } from '../redux/contacts/operations';
 import { selectContacts, selectError } from '../redux/contacts/selectors';
+import { setFilterType, setFilterValue } from '../redux/filters/actions';
 
 const Contacts = () => {
 	const dispatch = useDispatch();
@@ -54,23 +55,6 @@ const Contacts = () => {
 	return (
 		<div className={pageCss.Container}>
 			<div className={`${pageCss.Row}`}>
-				<div className={pageCss.Column}>
-					{contacts.length > 0 ? (
-						<div className={`${pageCss.Row}`}>
-							<ContactSearchForm />
-							<ul className={css.ContactsList}>
-								{contacts.map(contact => (
-									<ContactItem
-										key={contact.id}
-										data={contact}
-									/>
-								))}
-							</ul>
-						</div>
-					) : (
-						<h3>Iletişim kaydı bulunamadı...</h3>
-					)}
-				</div>
 				<div className={pageCss.Column}>
 					<Formik
 						initialValues={{
@@ -142,6 +126,23 @@ const Contacts = () => {
 						</Form>
 					</Formik>
 				</div>
+				<div className={pageCss.Column}>
+					{contacts.length > 0 ? (
+						<div className={`${pageCss.Row}`}>
+							<ContactSearchForm />
+							<ul className={css.ContactsList}>
+								{contacts.map(contact => (
+									<ContactItem
+										key={contact.id}
+										data={contact}
+									/>
+								))}
+							</ul>
+						</div>
+					) : (
+						<h3>Iletişim kaydı bulunamadı...</h3>
+					)}
+				</div>
 			</div>
 		</div>
 	);
@@ -165,19 +166,44 @@ const ContactItem = ({ data }) => {
 };
 
 const ContactSearchForm = () => {
+	const dispatch = useDispatch();
+	const searchTypeID = nanoid();
+	const searchValueID = nanoid();
 	return (
-		<Formik initialValues={{ type: 'name', value: '' }}>
-			<Form className={css.Form}>
-				<div className={css.FormRow}>
+		<Formik>
+			<Form className={css.Form} style={{ minWidth: '650px' }}>
+				<h5>Search Form</h5>
+				<div className={css.FormRow} style={{ gap: '0' }}>
 					<div className={css.FormGroup}>
-						<label htmlFor="search" className={css.Label}>
-							Search Contacts
+						<label htmlFor={searchTypeID} className={css.Label}>
+							Type
+						</label>
+						<select
+							name="type"
+							id={searchTypeID}
+							className={css.Input}
+							onChange={event =>
+								dispatch(setFilterType(event.target.value))
+							}
+						>
+							<option value="name">Name</option>
+							<option value="number">Phone</option>
+						</select>
+					</div>
+					<div className={css.FormGroup}>
+						<label htmlFor={searchValueID} className={css.Label}>
+							Search Value
 						</label>
 						<Field
 							type="text"
 							name="value"
-							id="search"
+							id={searchValueID}
 							className={css.Input}
+							style={{ height: '28px' }}
+							onChange={event =>
+								dispatch(setFilterValue(event.target.value))
+							}
+							disabled={true}
 						/>
 					</div>
 				</div>

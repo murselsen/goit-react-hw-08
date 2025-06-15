@@ -5,7 +5,7 @@ axios.defaults.headers.common['baseURL'] =
 	'https://connections-api.goit.global';
 
 import { Routes, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Toaster } from 'react-hot-toast';
 // Redux
 import { current } from './redux/auth/operations';
@@ -20,6 +20,7 @@ import PrivateRoute from './components/PrivateRoute';
 // App components
 import AppBar from './components/AppBar/AppBar';
 import AppFooterBar from './components/AppFooterBar/AppFooterBar';
+import { selectAuthToken } from './redux/auth/selectors';
 
 // Pages
 const Home = lazy(() => import('./pages/Home'));
@@ -30,9 +31,13 @@ const Contacts = lazy(() => import('./pages/Contacts'));
 // App
 const App = () => {
 	const dispatch = useDispatch();
+	const authToken = useSelector(selectAuthToken);
 	useEffect(() => {
+		if (!authToken) {
+			return;
+		}
 		dispatch(current());
-	}, [dispatch]);
+	}, [dispatch, authToken]);
 
 	return (
 		<Suspense fallback={<div>Loading...</div>}>

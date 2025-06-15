@@ -10,7 +10,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { nanoid } from 'nanoid';
 import * as Yup from 'yup';
 // import { toast } from 'react-hot-toast';
-import InputMask from 'react-input-mask';
 
 // Redux
 import { addContact, fetchContacts } from '../redux/contacts/operations';
@@ -114,7 +113,7 @@ const Contacts = () => {
 										id={phoneInput}
 										className={css.Input}
 										mask="999-99-99"
-									
+										placeholder="123-45-67"
 									/>
 
 									<ErrorMessage

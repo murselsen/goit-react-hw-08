@@ -57,9 +57,7 @@ const Contacts = () => {
 				<div className={pageCss.Column}>
 					{contacts.length > 0 ? (
 						<div className={`${pageCss.Row}`}>
-							<Formik initialValues={{ type: 'name', value: '' }}>
-								<Form className={css.Form}></Form>
-							</Formik>
+							<ContactSearchForm />
 							<ul className={css.ContactsList}>
 								{contacts.map(contact => (
 									<ContactItem
@@ -163,6 +161,28 @@ const ContactItem = ({ data }) => {
 				<button className={css.ActionButton}>Edit</button>
 			</div>
 		</li>
+	);
+};
+
+const ContactSearchForm = () => {
+	return (
+		<Formik initialValues={{ type: 'name', value: '' }}>
+			<Form className={css.Form}>
+				<div className={css.FormRow}>
+					<div className={css.FormGroup}>
+						<label htmlFor="search" className={css.Label}>
+							Search Contacts
+						</label>
+						<Field
+							type="text"
+							name="value"
+							id="search"
+							className={css.Input}
+						/>
+					</div>
+				</div>
+			</Form>
+		</Formik>
 	);
 };
 

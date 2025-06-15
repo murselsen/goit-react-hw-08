@@ -4,10 +4,24 @@ import css from './styles/Contacts.module.css';
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { nanoid } from 'nanoid';
+import * as Yup from 'yup';
 
 const Contacts = () => {
 	const nameInput = nanoid();
 	const phoneInput = nanoid();
+
+	const validationSchema = Yup.object().shape({
+		name: Yup.string()
+			.required('Name is required')
+			.min(2, 'Name must be at least 2 characters long')
+			.max(50, 'Name must not exceed 50 characters'),
+		phone: Yup.string()
+			.required('Phone number is required')
+			.matches(
+				/^\d{3}-\d{2}-\d{2}$/,
+				'Phone number must be in the format XXX-XX-XX'
+			),
+	});
 	return (
 		<div className={pageCss.Container}>
 			<div className={`${pageCss.Row}`}>
@@ -28,10 +42,7 @@ const Contacts = () => {
 							phone: '',
 						}}
 						onSubmit={() => {}}
-						// validationSchema={registerFormValidationSchema}
-						// validateOnMount={true}
-						// validateOnBlur={true}
-						// validateOnChange={true}
+						validationSchema={validationSchema}
 					>
 						<Form className={css.Form}>
 							<h2>New Contact Form</h2>
@@ -84,7 +95,7 @@ const Contacts = () => {
 										type="submit"
 										className={css.Button}
 									>
-										Register
+										Add Contact
 									</button>
 								</div>
 							</div>

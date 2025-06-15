@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 // Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { register } from '../../redux/auth/operations';
-import { selectAuthError } from '../../redux/auth/selectors';
+import { selectAuthError, selectAuthUser } from '../../redux/auth/selectors';
 
 // Styles
 import css from './RegisterForm.module.css';
@@ -19,18 +19,23 @@ const RegisterForm = () => {
 	const dispatch = useDispatch();
 
 	const authError = useSelector(selectAuthError);
+	const authUser = useSelector(selectAuthUser);
 
 	useEffect(() => {
 		if (authError) {
 			toast.error(`Error: ${authError}`);
 		}
 	}, [authError]);
+	useEffect(() => {
+		if (authUser && authUser.name !== null) {
+			toast.success(`Welcome, ${authUser.name}!`);
+		}
+	}, [authUser]);
 
 	// Form submission handler
 	const formHandleSubmit = (values, actions) => {
-		console.log('Form submitted with values:', values);
-		console.log('Actions:', actions);
 		dispatch(register(values));
+		actions.resetForm();
 	};
 
 	// Form validation schema
@@ -39,7 +44,9 @@ const RegisterForm = () => {
 			.required('❗ Required')
 			.min(3, '🚫 Username must be at least 3 characters'),
 		email: Yup.string().email('🚫 Invalid email').required('❗ Required'),
-		password: Yup.string().required('❗ Required'),
+		password: Yup.string()
+			.min(8, '🚫 Password must be at least 8 characters')
+			.required('❗ Required'),
 		checkPassword: Yup.string()
 			.oneOf([Yup.ref('password'), null], '🚫 Passwords must match')
 			.required('❗ Required'),

@@ -1,9 +1,13 @@
 import axios from 'axios';
 axios.defaults.baseURL = 'https://connections-api.goit.global'; // Set your API base URL here
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import setAuthToken from '../../utils/setAuthToken';
 
-import { AUTH_LOGIN, AUTH_REGISTER, AUTH_CURRENT } from './constants';
+import {
+	AUTH_LOGIN,
+	AUTH_REGISTER,
+	AUTH_CURRENT,
+	AUTH_CURRENT_FULFILLED,
+} from './constants';
 
 export const register = createAsyncThunk(AUTH_REGISTER, async (_, thunkAPI) => {
 	try {
@@ -30,13 +34,16 @@ export const login = createAsyncThunk(AUTH_LOGIN, async (_, thunkAPI) => {
 
 export const current = createAsyncThunk(AUTH_CURRENT, async (_, thunkAPI) => {
 	try {
-		const token = thunkAPI.getState().auth.token;
-		if (!token) {
-			return thunkAPI.rejectWithValue('No token found');
+		if (!thunkAPI.getState().auth.token) {
+			return;
+		} else {
+			const response = await axios.get('users/current', {
+				headers: {
+					Authorization: `Bearer ${thunkAPI.getState().auth.token}`,
+				},
+			});
+			return response.data;
 		}
-		setAuthToken(token); // Set the token in the axios headers
-		const response = await axios.get('users/current');
-		return response.data;
 	} catch (error) {
 		return thunkAPI.rejectWithValue(
 			error.message || 'An error occurred during refresh'

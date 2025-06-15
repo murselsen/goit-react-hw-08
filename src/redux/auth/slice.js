@@ -23,7 +23,6 @@ const initialState = {
 	token: null,
 	isLoggedIn: false,
 	isRefreshing: false,
-	isLoading: false,
 	error: null,
 };
 
@@ -54,6 +53,7 @@ const slice = createSlice({
 		});
 		builder.addCase(AUTH_CURRENT_REJECTED, (state, action) => {
 			state.isRefreshing = false;
+			state.token = null;
 			state.error = action.payload;
 		});
 		// Authentication Login Actions

@@ -30,7 +30,7 @@ const Contacts = () => {
 
 	useEffect(() => {
 		if (error) {
-			alert(`Error: ${error}`);
+			toast.error(`Error: ${error}`);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [error]);
@@ -144,7 +144,9 @@ const Contacts = () => {
 								))}
 							</ul>
 						) : (
-							<h3 className={css.NotFoundTitle}>No contact record found...</h3>
+							<h3 className={css.NotFoundTitle}>
+								No contact record found...
+							</h3>
 						)}
 					</div>
 				</div>

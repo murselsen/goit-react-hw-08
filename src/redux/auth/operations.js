@@ -1,6 +1,7 @@
 import axios from 'axios';
 axios.defaults.baseURL = 'https://connections-api.goit.global'; // Set your API base URL here
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import setAuthToken from '../../utils/setAuthToken';
 
 import { AUTH_LOGIN, AUTH_REGISTER, AUTH_CURRENT } from './constants';
 
@@ -33,7 +34,7 @@ export const current = createAsyncThunk(AUTH_CURRENT, async (_, thunkAPI) => {
 		if (!token) {
 			return thunkAPI.rejectWithValue('No token found');
 		}
-		axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+		setAuthToken(token); // Set the token in the axios headers
 		const response = await axios.get('users/current');
 		return response.data;
 	} catch (error) {

@@ -101,7 +101,6 @@ const authPersistReducer = persistReducer(
 		key: SLICE_NAME,
 		storage: storage,
 		whitelist: ['token'],
-		serialize: true,
 	},
 	slice.reducer
 );

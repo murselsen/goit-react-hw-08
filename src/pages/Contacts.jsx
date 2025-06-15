@@ -1,12 +1,42 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+// Styles
 import pageCss from './styles/Page.module.css';
 import css from './styles/Contacts.module.css';
 
+// Libraries
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { nanoid } from 'nanoid';
 import * as Yup from 'yup';
+// import { toast } from 'react-hot-toast';
+import InputMask from 'react-input-mask';
+
+// Redux
+import { addContact, fetchContacts } from '../redux/contacts/operations';
+import { selectContacts, selectError } from '../redux/contacts/selectors';
 
 const Contacts = () => {
+	const dispatch = useDispatch();
+	const error = useSelector(selectError);
+	useEffect(() => {
+		dispatch(fetchContacts());
+	}, [dispatch]);
+
+	useEffect(() => {
+		if (error) {
+			alert(`Error: ${error}`);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [error]);
+
+	const formHandleSubmit = (values, actions) => {
+		dispatch(addContact(values));
+		actions.resetForm();
+	};
+
+	const contacts = useSelector(selectContacts);
+
 	const nameInput = nanoid();
 	const phoneInput = nanoid();
 
@@ -15,7 +45,7 @@ const Contacts = () => {
 			.required('Name is required')
 			.min(2, 'Name must be at least 2 characters long')
 			.max(50, 'Name must not exceed 50 characters'),
-		phone: Yup.string()
+		number: Yup.string()
 			.required('Phone number is required')
 			.matches(
 				/^\d{3}-\d{2}-\d{2}$/,
@@ -26,22 +56,23 @@ const Contacts = () => {
 		<div className={pageCss.Container}>
 			<div className={`${pageCss.Row}`}>
 				<div className={pageCss.Column}>
-					<ul className={css.ContactsList}>
-						<ContactItem />
-						<ContactItem />
-						<ContactItem />
-						<ContactItem />
-
-						<ContactItem />
-					</ul>
+					{contacts.length > 0 ? (
+						<ul className={css.ContactsList}>
+							{contacts.map(contact => (
+								<ContactItem key={contact.id} data={contact} />
+							))}
+						</ul>
+					) : (
+						<h3>Iletişim kaydı bulunamadı...</h3>
+					)}
 				</div>
 				<div className={pageCss.Column}>
 					<Formik
 						initialValues={{
 							name: '',
-							phone: '',
+							number: '',
 						}}
-						onSubmit={() => {}}
+						onSubmit={formHandleSubmit}
 						validationSchema={validationSchema}
 					>
 						<Form className={css.Form}>
@@ -76,14 +107,18 @@ const Contacts = () => {
 									>
 										Phone
 									</label>
+
 									<Field
 										type="text"
-										name="phone"
+										name="number"
 										id={phoneInput}
 										className={css.Input}
+										mask="999-99-99"
+									
 									/>
+
 									<ErrorMessage
-										name="name"
+										name="number"
 										component={'span'}
 										className={css.ErrorMessage}
 									/>
@@ -107,13 +142,14 @@ const Contacts = () => {
 	);
 };
 
-const ContactItem = () => {
+const ContactItem = ({ data }) => {
+	const { name, number } = data;
 	return (
 		<li className={css.ContactItem}>
 			<div className={css.Info}>
-				<span className={css.Letter}>m</span>
-				<h3 className={css.Name}>🕴️ mürsel</h3>
-				<p className={css.Phone}>📞 785-54-34</p>
+				<span className={css.Letter}>{name[0]}</span>
+				<h3 className={css.Name}>🕴️ {name}</h3>
+				<p className={css.Phone}>📞 {number}</p>
 			</div>
 			<div className={css.Actions}>
 				<button className={css.ActionButton}>Delete</button>

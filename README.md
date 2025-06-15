@@ -58,4 +58,3 @@ kişisel rehberlerine kişi ekleyip silebilirler.
     "Sil" butonuna tıklayın.
 -   Kişileri filtrelemek için, arama çubuğunu kullanarak isim veya diğer
     bilgilere göre arama yapın.
-

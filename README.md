@@ -1,12 +1,61 @@
-# React + Vite
+# PhoneBook Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bu proje, modern React ekosistemi kullanılarak geliştirilmiş bir Telefon Rehberi
+(PhoneBook) uygulamasıdır. Kullanıcılar kayıt olabilir, giriş yapabilir ve
+kişisel rehberlerine kişi ekleyip silebilirler.
 
-Currently, two official plugins are available:
+## Özellikler
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-   Kullanıcı kayıt ve giriş sistemi (JWT token ile kimlik doğrulama)
+-   Kişi ekleme, silme ve filtreleme
+-   Formik & Yup ile form yönetimi ve doğrulama
+-   Redux Toolkit ile global state yönetimi
+-   redux-persist ile oturumun korunması
+-   react-hot-toast ile bildirimler
+-   Responsive ve modern arayüz
 
-## Expanding the ESLint configuration
+## Kullanılan Teknolojiler
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+-   [React](https://react.dev/)
+-   [Redux Toolkit](https://redux-toolkit.js.org/)
+-   [React Redux](https://react-redux.js.org/)
+-   [Redux Persist](https://github.com/rt2zz/redux-persist)
+-   [React Router DOM](https://reactrouter.com/)
+-   [react-hot-toast](https://react-hot-toast.com/)
+-   [Formik](https://formik.org/)
+-   [Yup](https://github.com/jquense/yup)
+-   [Axios](https://axios-http.com/)
+-   [Vite](https://vitejs.dev/)
+
+## Kurulum
+
+1. **Projeyi klonlayın:**
+    ```sh
+    git clone https://github.com/murselsen/goit-react-hw-08.git
+    cd goit-react-hw-08
+    ```
+2. **Bağımlılıkları yükleyin:**
+    ```sh
+    npm install
+    ```
+3. **Uygulamayı başlatın:**
+    ```sh
+    npm run dev
+    ```
+4. Tarayıcınızda `http://localhost:5173` adresine gidin.
+
+## Kullanım
+
+-   Kayıt olmak için ana sayfadaki "Kayıt Ol" butonuna tıklayın ve gerekli
+    bilgileri doldurun.
+-   Giriş yapmak için "Giriş Yap" butonuna tıklayın ve kayıtlı e-posta ve
+    şifrenizi girin.
+-   Giriş yaptıktan sonra, kişisel rehberinize kişi eklemek için "Kişi Ekle"
+    butonuna tıklayın.
+-   Kişi bilgilerini doldurduktan sonra "Kaydet" butonuna basarak kişiyi
+    rehberinize ekleyin.
+-   Rehberinizdeki kişileri silmek için, silmek istediğiniz kişinin yanındaki
+    "Sil" butonuna tıklayın.
+-   Kişileri filtrelemek için, arama çubuğunu kullanarak isim veya diğer
+    bilgilere göre arama yapın.
+

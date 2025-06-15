@@ -1,0 +1,163 @@
+.ContactsColumn {
+    padding: 30px;
+    border-radius: 3cap;
+}
+
+.ContactsList {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: space-evenly;
+    margin: 0 auto;
+}
+
+.ContactsList .ContactItem {
+    background-color: var(--black);
+    width: 100%;
+    min-width: 600px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    padding: 20px 30px;
+    border-radius: 20px;
+    color: white
+}
+
+.ContactItem .Info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.ContactItem .Letter {
+    width: 50px;
+    height: 50px;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: var(--teal);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+.ContactItem .Name,
+.ContactItem .Phone {
+    text-transform: capitalize;
+    font-size: 1.25em;
+}
+
+.ContactItem hr {
+    width: 100%;
+    border: none;
+    height: 1px;
+    background-color: var(--white);
+    opacity: 0.2;
+    margin: 0px 0;
+}
+
+.ContactItem .Actions {
+    display: flex;
+    flex-wrap: no-wrap;
+    gap: 10px;
+}
+
+.ContactItem .Actions .ActionButton {
+    padding: 15px 20px;
+    width: 100%;
+    border-radius: 5px;
+    background-color: var(--grey);
+    color: var(--white);
+    cursor: pointer;
+    font-size: 18px;
+    border: 1px solid var(--teal);
+    transition: all 0.3s ease;
+}
+
+.ContactItem .Actions .ActionButton:hover {
+    background-color: var(--teal);
+    color: var(--white);
+    transform: scale(0.95);
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.Form {
+    background-color: var(--black);
+    color: var(--white);
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    max-height: max-content;
+    padding: 45px 35px;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.Form .FormRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 30px;
+}
+
+.Form .FormRow .FormGroup {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    gap: 10px;
+}
+
+
+
+
+.Form .FormRow .FormGroup .Input {
+    padding: 5px 10px;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid var(--white);
+    color: var(--white);
+    transition: border-bottom 1.3s cubic-bezier(0.165, 0.84, 0.44, 1), color 0.3s ease;
+}
+
+.Form .FormRow .FormGroup .Input:focus {
+    border-bottom: 5px solid var(--teal);
+    color: var(--teal)
+}
+
+.Form .FormRow .FormGroup .Button {
+    padding: 10px 20px;
+    background-color: var(--teal);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.Form .FormRow .FormGroup .Button:hover {
+    background-color: var(--teal-dark);
+    border: 1px solid var(--teal);
+    transform: scale(0.95);
+}
+
+.FormGroup .ErrorMessage {
+    color: red;
+    font-size: 14px;
+
+    transition: all 5.3s ease-in-out;
+}

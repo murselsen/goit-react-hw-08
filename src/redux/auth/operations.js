@@ -7,11 +7,8 @@ import { AUTH_LOGIN, AUTH_REGISTER, AUTH_CURRENT } from './constants';
 export const register = createAsyncThunk(AUTH_REGISTER, async (_, thunkAPI) => {
 	try {
 		const response = await axios.post('users/signup', _);
-		console.log('Registration response data:', response.data);
 		return response.data;
 	} catch (error) {
-		console.error('Registration error:', error);
-
 		return thunkAPI.rejectWithValue(
 			error.message || 'An error occurred during registration'
 		);
@@ -22,10 +19,8 @@ export const login = createAsyncThunk(AUTH_LOGIN, async (_, thunkAPI) => {
 	try {
 		const response = await axios.post('users/login', _);
 		const data = response.data;
-		console.log('Login response data:', response);
 		return data;
 	} catch (error) {
-		console.error('Login error:', error);
 		return thunkAPI.rejectWithValue(
 			error.message || 'An error occurred during login'
 		);
@@ -40,10 +35,8 @@ export const current = createAsyncThunk(AUTH_CURRENT, async (_, thunkAPI) => {
 		}
 		axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 		const response = await axios.get('users/current');
-		console.log('Current user response data:', response.data);
 		return response.data;
 	} catch (error) {
-		console.error('Refresh error:', error);
 		return thunkAPI.rejectWithValue(
 			error.message || 'An error occurred during refresh'
 		);

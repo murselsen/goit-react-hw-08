@@ -1,5 +1,5 @@
 import React from "react";
-import pageCss from "./Page.module.css";
+import pageCss from './styles/Page.module.css';
 import css from "./styles/Home.module.css";
 
 // Redux

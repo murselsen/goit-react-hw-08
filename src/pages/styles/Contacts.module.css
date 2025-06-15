@@ -8,8 +8,6 @@
     flex-direction: column;
     flex-wrap: wrap;
     gap: 30px;
-    justify-content: space-evenly;
-    margin: 0 auto;
 }
 
 .ContactsList .ContactItem {
@@ -18,7 +16,7 @@
     min-width: 650px;
     display: flex;
     flex-direction: row;
-    align-items: center;
+
     justify-content: space-between;
     gap: 50px;
     padding: 20px 30px;
@@ -60,14 +58,7 @@
     font-size: 1.25em;
 }
 
-.ContactItem hr {
-    width: 100%;
-    border: none;
-    height: 1px;
-    background-color: var(--white);
-    opacity: 0.2;
-    margin: 0px 0;
-}
+
 
 .ContactItem .Actions {
     display: flex;

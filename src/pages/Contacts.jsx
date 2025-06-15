@@ -56,11 +56,19 @@ const Contacts = () => {
 			<div className={`${pageCss.Row}`}>
 				<div className={pageCss.Column}>
 					{contacts.length > 0 ? (
-						<ul className={css.ContactsList}>
-							{contacts.map(contact => (
-								<ContactItem key={contact.id} data={contact} />
-							))}
-						</ul>
+						<div className={`${pageCss.Row}`}>
+							<Formik initialValues={{ type: 'name', value: '' }}>
+								<Form className={css.Form}></Form>
+							</Formik>
+							<ul className={css.ContactsList}>
+								{contacts.map(contact => (
+									<ContactItem
+										key={contact.id}
+										data={contact}
+									/>
+								))}
+							</ul>
+						</div>
 					) : (
 						<h3>Iletişim kaydı bulunamadı...</h3>
 					)}
